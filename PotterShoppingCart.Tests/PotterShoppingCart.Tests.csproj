@@ -48,15 +48,24 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="User Story.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PotterShoppingCart\PotterShoppingCart.csproj">
+      <Project>{4665E4EB-722B-45A9-82E1-5BC2BA7CA479}</Project>
+      <Name>PotterShoppingCart</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
