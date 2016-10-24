@@ -20,9 +20,19 @@ namespace PotterShoppingCart
 
         public int Billing()
         {
-            int result = GetDistinctCount() * 100;
-            double discount = GetMainDiscount();
-            return Convert.ToInt32(result * discount + (this._books.Count - GetDistinctCount()) * 100);
+            int result = 0;
+            while (this._books.Count > 0)
+            {
+                int partResult = GetDistinctCount() * 100;
+                double discount = GetMainDiscount();
+                result += Convert.ToInt32(partResult * discount);
+
+                foreach (var book in this._books.GroupBy(x => x.Episode).Select(x => x.First()))
+                {
+                    this._books.Remove(book);
+                }
+            }
+            return result;
         }
 
         private int GetDistinctCount()
