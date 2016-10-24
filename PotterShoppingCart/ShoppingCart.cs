@@ -17,14 +17,17 @@ namespace PotterShoppingCart
             this._books.Add(book);
         }
 
-        public object Billing()
+        public int Billing()
         {
-            return this._books.Count * 100;
+            if (this._books.Count > 1)
+                return Convert.ToInt32(this._books.Count * 100 * 0.95);
+            else
+                return this._books.Count * 100;
         }
 
-        public void AddToCart(List<PotterBook> books)
+        public void AddToCart(IEnumerable<PotterBook> books)
         {
-            throw new NotImplementedException();
+            this._books.AddRange(books);
         }
     }
 }
