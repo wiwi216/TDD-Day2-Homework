@@ -20,6 +20,8 @@ namespace PotterShoppingCart
         public int Billing()
         {
             int result = this._books.Count * 100;
+            if (this._books.Count > 2)
+                return Convert.ToInt32(result * 0.9);
             if (this._books.Count > 1)
                 return Convert.ToInt32(result * 0.95);
             else
