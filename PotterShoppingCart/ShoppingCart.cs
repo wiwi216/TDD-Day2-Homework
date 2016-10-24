@@ -21,5 +21,10 @@ namespace PotterShoppingCart
         {
             return this._books.Count * 100;
         }
+
+        public void AddToCart(List<PotterBook> books)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
