@@ -23,27 +23,23 @@ namespace PotterShoppingCart
             int result = 0;
             while (this._books.Count > 0)
             {
-                int partResult = GetDistinctCount() * 100;
-                double discount = GetMainDiscount();
+                List<PotterBook> booksForCharge = this._books.GroupBy(x => x.Episode).Select(x => x.First()).ToList();
+                int partResult = booksForCharge.Count * 100;
+                double discount = GetDiscountByCount(booksForCharge.Count);
                 result += Convert.ToInt32(partResult * discount);
 
-                foreach (var book in this._books.GroupBy(x => x.Episode).Select(x => x.First()))
+                foreach (var book in booksForCharge)
                 {
                     this._books.Remove(book);
                 }
             }
             return result;
         }
-
-        private int GetDistinctCount()
-        {
-            return this._books.Select(x => x.Episode).Distinct().Count();
-        }
-
-        private double GetMainDiscount()
+        
+        private double GetDiscountByCount(int count)
         {
             double discount = 1.00;
-            switch (GetDistinctCount())
+            switch (count)
             {
                 case 2:
                     discount = 0.95;
