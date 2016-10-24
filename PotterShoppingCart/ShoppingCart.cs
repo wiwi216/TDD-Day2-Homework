@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PotterShoppingCart
 {
@@ -19,15 +20,15 @@ namespace PotterShoppingCart
 
         public int Billing()
         {
-            int result = this._books.Count * 100;
+            int result = this._books.Select(x => x.Episode).Distinct().Count() * 100;
             double discount = GetDiscount();
-            return Convert.ToInt32(result * discount);
+            return Convert.ToInt32(result * discount + (this._books.Count - this._books.Select(x => x.Episode).Distinct().Count()) * 100);
         }
 
         private double GetDiscount()
         {
             double discount = 1.00;
-            switch (this._books.Count)
+            switch (this._books.Select(x => x.Episode).Distinct().Count())
             {
                 case 2:
                     discount = 0.95;
