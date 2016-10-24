@@ -20,12 +20,17 @@ namespace PotterShoppingCart
         public int Billing()
         {
             int result = this._books.Count * 100;
-            if (this._books.Count > 2)
-                return Convert.ToInt32(result * 0.9);
-            if (this._books.Count > 1)
-                return Convert.ToInt32(result * 0.95);
-            else
-                return result;
+            switch (this._books.Count)
+            {
+                case 1:
+                    return result;
+                case 2:
+                    return Convert.ToInt32(result * 0.95);
+                case 3:
+                    return Convert.ToInt32(result * 0.9);
+                default:
+                    return result;
+            }
         }
 
         public void AddToCart(IEnumerable<PotterBook> books)
