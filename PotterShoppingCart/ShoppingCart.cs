@@ -20,19 +20,29 @@ namespace PotterShoppingCart
         public int Billing()
         {
             int result = this._books.Count * 100;
+            double discount = GetDiscount();
+            return Convert.ToInt32(result * discount);
+        }
+
+        private double GetDiscount()
+        {
+            double discount = 1.00;
             switch (this._books.Count)
             {
-                case 1:
-                    return result;
                 case 2:
-                    return Convert.ToInt32(result * 0.95);
+                    discount = 0.95;
+                    break;
                 case 3:
-                    return Convert.ToInt32(result * 0.9);
+                    discount = 0.9;
+                    break;
                 case 4:
-                    return Convert.ToInt32(result * 0.8);
+                    discount = 0.8;
+                    break;
                 default:
-                    return result;
+                    break;
             }
+
+            return discount;
         }
 
         public void AddToCart(IEnumerable<PotterBook> books)
