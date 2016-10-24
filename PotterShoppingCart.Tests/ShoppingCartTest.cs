@@ -137,5 +137,28 @@ namespace PotterShoppingCart.Tests
             //assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void ShoppingCart_buy_5_different_books()
+        {
+            //arrange
+            ShoppingCart target = new ShoppingCart();
+            List<PotterBook> books = new List<PotterBook>
+            {
+                new PotterBook { Episode=1 },
+                new PotterBook { Episode=2 },
+                new PotterBook { Episode=3 },
+                new PotterBook { Episode=4 },
+                new PotterBook { Episode=5 },
+            };
+            target.AddToCart(books);
+            var expected = 375;
+
+            //act
+            var actual = target.Billing();
+
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
